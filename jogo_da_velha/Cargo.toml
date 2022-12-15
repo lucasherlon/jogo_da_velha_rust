@@ -1,4 +1,5 @@
 [package]
+authors = "Lucas Herlon"
 name = "jogo_da_velha"
 version = "0.1.0"
 edition = "2021"

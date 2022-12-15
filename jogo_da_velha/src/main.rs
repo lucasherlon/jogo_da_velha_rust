@@ -15,13 +15,50 @@ fn main() {
     io::stdin().read_line(&mut jogardor_2).expect("Input error!");
 
     println!("{}, seu símbolo é o: X", jogardor_1);
-    println!("{}, seu símbolo é o: X", jogardor_2);
+    println!("{}, seu símbolo é o: O", jogardor_2);
 
     let mut linha: u8 = 0;
     let mut coluna: u8 = 0;
+    let mut jogada: u8 = 1;
     let mut simbolo: char;
 
-    
+    loop {
+        if jogada % 2 == 1 {
+            println!("{}, é a sua vez, escolha linha e coluna [1 a 3]", jogardor_1);
+            simbolo = 'X';
+        } else {
+            println!("{}, é a sua vez, escolha linha e coluna [1 a 3]", jogardor_2);
+            simbolo = 'O';
+        }
+
+        let mut linha_valida: bool = false;
+        while(!linha_valida) {
+            print!("Digite o número da linha [1,2,3]: ");
+            io::stdout().flush().unwrap();
+            io::stdin().read_line(&mut linha).expect("Input error!");
+
+            if linha >= 1 && linha <= 3 {
+                linha_valida true;
+            } else {
+                println!("Entrada inválida. Tente novamente...");
+            }
+        }
+
+        let mut coluna_valida: bool = false;
+        while(!coluna_valida) {
+            print!("Digite o número da coluna [1,2,3]: ");
+            io::stdout().flush().unwrap();
+            io::stdin().read_line(&mut coluna).expect("Input error!");
+
+            if coluna >= 1 && coluna <= 3 {
+                coluna_valida true;
+            } else {
+                println!("Entrada inválida. Tente novamente...");
+            }
+        }
+
+
+    }
 
 
     
