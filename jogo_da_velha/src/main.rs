@@ -17,6 +17,9 @@ fn main() {
     println!("{}, seu símbolo é o: X", jogardor_1);
     println!("{}, seu símbolo é o: O", jogardor_2);
 
+    let mut linha_s = String::new();
+    let mut coluna_s = String::new();
+    let mut jogada_s = String::new();
     let mut linha: u8 = 0;
     let mut coluna: u8 = 0;
     let mut jogada: u8 = 1;
@@ -32,26 +35,30 @@ fn main() {
         }
 
         let mut linha_valida: bool = false;
-        while(!linha_valida) {
+
+        while !linha_valida {
             print!("Digite o número da linha [1,2,3]: ");
             io::stdout().flush().unwrap();
-            io::stdin().read_line(&mut linha).expect("Input error!");
+            io::stdin().read_line(&mut linha_s).expect("Input error!");
+            linha = linha_s.trim().parse::<u8>().unwrap();
 
             if linha >= 1 && linha <= 3 {
-                linha_valida true;
+                linha_valida = true;
             } else {
                 println!("Entrada inválida. Tente novamente...");
             }
         }
 
         let mut coluna_valida: bool = false;
-        while(!coluna_valida) {
+
+        while !coluna_valida {
             print!("Digite o número da coluna [1,2,3]: ");
             io::stdout().flush().unwrap();
-            io::stdin().read_line(&mut coluna).expect("Input error!");
+            io::stdin().read_line(&mut coluna_s).expect("Input error!");
+            coluna = coluna_s.trim().parse::<u8>().unwrap();
 
             if coluna >= 1 && coluna <= 3 {
-                coluna_valida true;
+                coluna_valida = true;
             } else {
                 println!("Entrada inválida. Tente novamente...");
             }
