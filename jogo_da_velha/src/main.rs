@@ -81,7 +81,7 @@ fn main() {
         linha -= 1;
         coluna -= 1;
         
-        //Verificandi se a posição digitada já está preenchida
+        //Verificando se a posição digitada já está preenchida
         if tabuleiro[linha][coluna] == 'X' || tabuleiro[linha][coluna] == 'O' {
             println!("Posição já preenchida. Tente novamente...");
         } else {
