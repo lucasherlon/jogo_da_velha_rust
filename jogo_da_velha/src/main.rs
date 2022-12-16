@@ -3,59 +3,73 @@ use std::io::prelude::*;
 
 fn main() {
     let mut tabuleiro: [[char;3];3] = [['*';3];3];
-    let mut jogardor_1 = String::new();
-    let mut jogardor_2 = String::new();
+    let mut jogador_1 = String::new();
+    let mut jogador_2 = String::new();
 
     print!("Jogador 1, digite seu nome: ");
     io::stdout().flush().unwrap();
-    io::stdin().read_line(&mut jogardor_1).expect("Input error!");
+    io::stdin().read_line(&mut jogador_1).expect("Input error!");
+    let jogador_1: &str = jogador_1.trim();
 
     print!("Jogador 2, digite seu nome: ");
     io::stdout().flush().unwrap();
-    io::stdin().read_line(&mut jogardor_2).expect("Input error!");
+    io::stdin().read_line(&mut jogador_2).expect("Input error!");
+    let jogador_2: &str = jogador_2.trim();
 
-    println!("{}, seu símbolo é o: X", jogardor_1);
-    println!("{}, seu símbolo é o: O", jogardor_2);
+    println!("{}, seu símbolo é o: X", jogador_1);
+    println!("{}, seu símbolo é o: O", jogador_2);
 
-    let mut linha_s = String::new();
-    let mut coluna_s = String::new();
-    let mut jogada_s = String::new();
-    let mut linha: u8 = 0;
-    let mut coluna: u8 = 0;
-    let mut jogada: u8 = 1;
+    
+    
+    let mut linha: usize = 0;
+    let mut coluna: usize = 0;
+    let mut jogada: usize = 1;
     let mut simbolo: char;
 
     loop {
+
         if jogada % 2 == 1 {
-            println!("{}, é a sua vez, escolha linha e coluna [1 a 3]", jogardor_1);
+            println!("{}, é a sua vez!", jogador_1);
+
             simbolo = 'X';
         } else {
-            println!("{}, é a sua vez, escolha linha e coluna [1 a 3]", jogardor_2);
+            println!("{}, é a sua vez!", jogador_2);
+            
             simbolo = 'O';
         }
 
         let mut linha_valida: bool = false;
 
         while !linha_valida {
-            print!("Digite o número da linha [1,2,3]: ");
+            let mut linha_s = String::new();
+            print!("Digite o número da linha [1,2 ou 3]: ");
             io::stdout().flush().unwrap();
             io::stdin().read_line(&mut linha_s).expect("Input error!");
-            linha = linha_s.trim().parse::<u8>().unwrap();
+            linha = match linha_s.trim().parse() {
+                Ok(num) => num,
+                Err(_) => panic!("Parsing error"),
+            };
 
             if linha >= 1 && linha <= 3 {
                 linha_valida = true;
             } else {
                 println!("Entrada inválida. Tente novamente...");
+                io::stdout().flush().unwrap();
             }
         }
 
         let mut coluna_valida: bool = false;
 
         while !coluna_valida {
-            print!("Digite o número da coluna [1,2,3]: ");
+            let mut coluna_s = String::new();
+            print!("Digite o número da coluna [1,2 ou 3]: ");
             io::stdout().flush().unwrap();
             io::stdin().read_line(&mut coluna_s).expect("Input error!");
-            coluna = coluna_s.trim().parse::<u8>().unwrap();
+            coluna = match coluna_s.trim().parse() {
+                Ok(num) => num,
+                Err(_) => panic!("Parsing error!"),
+            };
+        
 
             if coluna >= 1 && coluna <= 3 {
                 coluna_valida = true;
@@ -64,19 +78,50 @@ fn main() {
             }
         }
 
+        linha -= 1;
+        coluna -= 1;
+
+        if tabuleiro[linha][coluna] == 'X' || tabuleiro[linha][coluna] == 'O' {
+            println!("Posição já preenchida. Tente novamente...");
+        } else {
+            tabuleiro[linha][coluna] = simbolo;
+            jogada += 1;
+        }
+
+        //imprimir tabuleiro
+        for i in 0..3 {
+            for j in 0..3 {
+                print!(" {} | ", tabuleiro[i][j]);
+            }
+            println!()
+        }
+        io::stdout().flush().unwrap();
+
+        if tabuleiro[0][0] == 'X' && tabuleiro[0][1] == 'X' && tabuleiro[0][2] == 'X' || 
+        (tabuleiro[1][0] == 'X' && tabuleiro[1][1] == 'X' && tabuleiro[1][2] == 'X') ||
+        (tabuleiro[2][0]  == 'X' && tabuleiro[2][1] == 'X' && tabuleiro[2][2] == 'X') ||
+        (tabuleiro[0][0] == 'X' && tabuleiro[1][0] == 'X' && tabuleiro[2][0] == 'X') ||
+        (tabuleiro[0][1] == 'X' && tabuleiro[1][1] == 'X' && tabuleiro[2][1] == 'X') ||
+        (tabuleiro[0][2] == 'X' && tabuleiro[1][2] == 'X' && tabuleiro[2][2] == 'X') ||
+        (tabuleiro[0][0] == 'X' && tabuleiro[1][1] == 'X' && tabuleiro[2][2] == 'X') ||
+        (tabuleiro[0][2] == 'X' && tabuleiro[1][1] == 'X' && tabuleiro[2][0] == 'X') {
+            println!("Parabéns, {}, você ganhou!", jogador_1);
+            break;
+        } else if tabuleiro[0][0] == 'O' && tabuleiro[0][1] == 'O' && tabuleiro[0][2] == 'O' || 
+        (tabuleiro[1][0] == 'O' && tabuleiro[1][1] == 'O' && tabuleiro[1][2] == 'O') ||
+        (tabuleiro[2][0]  == 'O' && tabuleiro[2][1] == 'O' && tabuleiro[2][2] == 'O') ||
+        (tabuleiro[0][0] == 'O' && tabuleiro[1][0] == 'O' && tabuleiro[2][0] == 'O') ||
+        (tabuleiro[0][1] == 'O' && tabuleiro[1][1] == 'O' && tabuleiro[2][1] == 'O') ||
+        (tabuleiro[0][2] == 'O' && tabuleiro[1][2] == 'O' && tabuleiro[2][2] == 'O') ||
+        (tabuleiro[0][0] == 'O' && tabuleiro[1][1] == 'O' && tabuleiro[2][2] == 'O') ||
+        (tabuleiro[0][2] == 'O' && tabuleiro[1][1] == 'O' && tabuleiro[2][0] == 'O') {
+            println!("Parabéns, {}, você ganhou!", jogador_2);
+            break;
+        } else if jogada > 9 {
+            println!("Deu velha. Ninguém ganhou!");
+            break;
+        }
 
     }
-
-
-    
 
 }
-
-/*
-    for i in 0..3 {
-        for j in 0..3 {
-            print!(" {} | ", tabuleiro[i][j]);
-        }
-        println!()
-    }
-    */
