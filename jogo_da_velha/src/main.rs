@@ -96,7 +96,6 @@ fn main() {
             }
             println!()
         }
-        io::stdout().flush().unwrap();
 
         //Verificando se há ganhador
         if tabuleiro[0][0] == 'X' && tabuleiro[0][1] == 'X' && tabuleiro[0][2] == 'X' || 
