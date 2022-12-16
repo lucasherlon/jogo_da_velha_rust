@@ -28,11 +28,9 @@ fn main() {
 
         if jogada % 2 == 1 {
             println!("{}, é a sua vez!", jogador_1);
-
             simbolo = 'X';
         } else {
             println!("{}, é a sua vez!", jogador_2);
-            
             simbolo = 'O';
         }
 
