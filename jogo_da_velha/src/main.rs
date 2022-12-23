@@ -26,7 +26,7 @@ fn main() {
     let mut jogada: usize = 1;
     let mut simbolo: char;
 
-    loop {
+    'jogo: loop {
 
         simbolo = if jogada % 2 == 1 {
             println!("{}, é a sua vez!", jogador_1);
@@ -107,7 +107,7 @@ fn main() {
         (tabuleiro[0][0] == 'X' && tabuleiro[1][1] == 'X' && tabuleiro[2][2] == 'X') ||
         (tabuleiro[0][2] == 'X' && tabuleiro[1][1] == 'X' && tabuleiro[2][0] == 'X') {
             println!("Parabéns, {}, você ganhou!", jogador_1);
-            break;
+            break 'jogo;
         } else if tabuleiro[0][0] == 'O' && tabuleiro[0][1] == 'O' && tabuleiro[0][2] == 'O' || 
         (tabuleiro[1][0] == 'O' && tabuleiro[1][1] == 'O' && tabuleiro[1][2] == 'O') ||
         (tabuleiro[2][0]  == 'O' && tabuleiro[2][1] == 'O' && tabuleiro[2][2] == 'O') ||
@@ -117,10 +117,10 @@ fn main() {
         (tabuleiro[0][0] == 'O' && tabuleiro[1][1] == 'O' && tabuleiro[2][2] == 'O') ||
         (tabuleiro[0][2] == 'O' && tabuleiro[1][1] == 'O' && tabuleiro[2][0] == 'O') {
             println!("Parabéns, {}, você ganhou!", jogador_2);
-            break;
+            break 'jogo;
         } else if jogada > 9 {
             println!("Deu velha. Ninguém ganhou!");
-            break;
+            break 'jogo;
         }
 
     }
