@@ -2,7 +2,7 @@ use std::io;
 use std::io::prelude::*;
 
 fn main() {
-    let mut tabuleiro: [[char;3];3] = [['*';3];3];
+    let mut tabuleiro: [[char;3];3] = [[' ';3];3];
     let mut jogador_1 = String::new();
     let mut jogador_2 = String::new();
 
