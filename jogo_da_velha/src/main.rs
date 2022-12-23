@@ -92,7 +92,7 @@ fn main() {
         //imprimir tabuleiro
         for i in 0..3 {
             for j in 0..3 {
-                print!("[ {} ]  ", tabuleiro[i][j]);
+                print!("[ {} ] ", tabuleiro[i][j]);
             }
             println!()
         }
