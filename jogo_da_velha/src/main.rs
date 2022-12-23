@@ -23,12 +23,12 @@ fn main() {
 
     let mut linha: usize = 0;
     let mut coluna: usize = 0;
-    let mut jogada: usize = 1;
+    let mut rodada: usize = 1;
     let mut simbolo: char;
 
     'jogo: loop {
 
-        simbolo = if jogada % 2 == 1 {
+        simbolo = if rodada % 2 == 1 {
             println!("{}, é a sua vez!", jogador_1);
             'X'
         } else {
@@ -86,7 +86,7 @@ fn main() {
             println!("Posição já preenchida. Tente novamente...");
         } else {
             tabuleiro[linha][coluna] = simbolo;
-            jogada += 1;
+         rodada += 1;
         }
 
         //imprimir tabuleiro
@@ -118,7 +118,7 @@ fn main() {
         (tabuleiro[0][2] == 'O' && tabuleiro[1][1] == 'O' && tabuleiro[2][0] == 'O') {
             println!("Parabéns, {}, você ganhou!", jogador_2);
             break 'jogo;
-        } else if jogada > 9 {
+        } else if rodada > 9 {
             println!("Deu velha. Ninguém ganhou!");
             break 'jogo;
         }
