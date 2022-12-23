@@ -6,6 +6,8 @@ fn main() {
     let mut jogador_1 = String::new();
     let mut jogador_2 = String::new();
 
+    println!("{:-^40}", "BEM-VINDOS AO JOGO DA VELHA");
+
     print!("Jogador 1, digite seu nome: ");
     io::stdout().flush().unwrap();
     io::stdin().read_line(&mut jogador_1).expect("Input error!");
@@ -26,13 +28,13 @@ fn main() {
 
     loop {
 
-        if jogada % 2 == 1 {
+        simbolo = if jogada % 2 == 1 {
             println!("{}, é a sua vez!", jogador_1);
-            simbolo = 'X';
+            'X'
         } else {
             println!("{}, é a sua vez!", jogador_2);
-            simbolo = 'O';
-        }
+            'O'
+        };
 
         let mut linha_valida: bool = false;
 
