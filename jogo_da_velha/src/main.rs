@@ -36,9 +36,9 @@ fn main() {
             'O'
         };
 
-        let mut linha_valida: bool = false;
+        let mut ok: bool = false;
 
-        while !linha_valida {
+        while !ok {
             let mut linha_s = String::new();
 
             print!("Digite o número da linha [1,2 ou 3]: ");
@@ -50,16 +50,16 @@ fn main() {
             };
 
             if linha >= 1 && linha <= 3 {
-                linha_valida = true;
+                ok = true;
             } else {
                 println!("Entrada inválida. Tente novamente...");
                 io::stdout().flush().unwrap();
             }
         }
 
-        let mut coluna_valida: bool = false;
+        let mut ok: bool = false;
 
-        while !coluna_valida {
+        while !ok {
             let mut coluna_s = String::new();
 
             print!("Digite o número da coluna [1,2 ou 3]: ");
@@ -71,7 +71,7 @@ fn main() {
             };
             
             if coluna >= 1 && coluna <= 3 {
-                coluna_valida = true;
+                ok = true;
             } else {
                 println!("Entrada inválida. Tente novamente...");
             }
